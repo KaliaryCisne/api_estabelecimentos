@@ -5,3 +5,4 @@ from .serializers import ProdutoSerializer
 class ProdutoViewSet(ModelViewSet):
     queryset = Produto.objects.all()
     serializer_class = ProdutoSerializer
+    filterset_fields = ['nome', 'descricao']

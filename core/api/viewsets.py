@@ -14,7 +14,21 @@ class EstabelecimentoViewSet(ModelViewSet):
     serializer_class = EstabelecimentoSerializer
 
     def get_queryset(self):
-        return Estabelecimento.objects.filter(aprovado=True)
+        id = self.request.query_params.get('id', None)
+        nome = self.request.query_params.get('nome', None)
+        descricao = self.request.query_params.get('descricao', None)
+        queryset = Estabelecimento.objects.all()
+
+        if id:
+            queryset = queryset.filter(pk=id)
+
+        if nome:
+            queryset = queryset.filter(nome__iexact=nome)
+
+        if descricao:
+            queryset = queryset.filter(descricao__iexact=descricao)
+
+        return queryset
 
     # Retorna uma lista de recursos
     def list(self, request, *args, **kwargs):
