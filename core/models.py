@@ -18,5 +18,12 @@ class Estabelecimento(models.Model):
     foto = models.ImageField(upload_to='estabelecimentos', null=True, blank=True)
 
 
+    # Esse método é colocado nos fields do serializer para ser visto
+    @property
+    def descricao_completa2(self):
+        return '%s - %s' %(self.nome, self.descricao)
+
+
+
     def __str__(self):
         return self.nome
